@@ -6,7 +6,7 @@ export default function Input() {
   return (
     <div className='input'>
       <input type="text" placeholder='Type something...' />
-      <div class="send">
+      <div className="send">
         <img src={Attach} alt="" />
         <input type="file" style={{display:"none"}} id="file" />
         <label htmlFor="file">
