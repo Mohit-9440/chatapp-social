@@ -9,7 +9,6 @@ export default function Sidebar() {
         <Navbar/>
         <Search/>
         <Chats/>
-        <Chats/>
     </div>
   )
 }
