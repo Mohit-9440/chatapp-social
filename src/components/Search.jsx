@@ -1,8 +1,17 @@
 import React, { useState,useContext } from 'react'
-import { collection, getDocs, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore'
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  setDoc,
+  doc,
+  updateDoc,
+  serverTimestamp,
+  getDoc,
+} from "firebase/firestore";
 import { db } from '../firebase';
 import { AuthContext } from '../context/AuthContext';
-import { doc } from 'firebase/firestore';
 export default function Search() {
   const [username, setUsername] = useState("")
   const [user, setUser] = useState(null)
@@ -37,7 +46,7 @@ export default function Search() {
         ? currentUser.uid + user.uid 
         : user.uid + currentUser.uid;
     try {
-      const res = await getDocs(doc(db, "chats", combinedId));
+      const res = await getDoc(doc(db, "chats", combinedId));
 
       if (!res.exists()) {
         // create a chat in chats collection
@@ -83,20 +92,5 @@ export default function Search() {
           </div>
         </div>}
     </div>
-  )
-}
-
-
-
-
-// userChats:{
-//   mohitId:{
-//     combinedId:{
-//       userInfo{
-//         dn,img,id
-//       },
-//       lastMessage:"",
-//       date:
-//     }
-//   }
-// }
+  );
+};
