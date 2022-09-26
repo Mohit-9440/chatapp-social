@@ -80,6 +80,9 @@ const Input = () => {
         placeholder="Type something..."
         onChange={(e) => setText(e.target.value)}
         value={text}
+        onKeyDown={(e) => {if (e.key === 'Enter' && text !=='') {
+          handleSend();
+    }}}
       />
       <div className="send">
         <img src={Attach} alt="" />
@@ -92,7 +95,9 @@ const Input = () => {
         <label htmlFor="file">
           <img src={Img} alt="" />
         </label>
-        <button onClick={handleSend}>Send</button>
+        <button onClick={text !=='' ? handleSend : null}
+        
+        >Send</button>
       </div>
     </div>
   );
