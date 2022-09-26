@@ -12,21 +12,43 @@ import {
 } from "firebase/firestore";
 import { db } from '../firebase';
 import { AuthContext } from '../context/AuthContext';
+import { useEffect } from 'react';
 export default function Search() {
   const [username, setUsername] = useState("")
   const [user, setUser] = useState(null)
+  // const [allUser, setAllUser] = useState(null)
   const [err, setErr] = useState(false)
 
   const {currentUser} = useContext(AuthContext)
+  // console.log(user)
+  // console.log(allUser ? allUser : 'no data')
 
+  // useEffect(() => (async() => {
+  //   const allUsers = query(
+  //     collection(db, "users")
+  //   ); 
+  //   try{
+  //     const querySnapshot = await getDocs(allUsers);
+  //     console.log(querySnapshot)
+  //     const allData = []
+  //   querySnapshot.forEach((doc) => { 
+  //     allData.push(doc.data()) 
+  //   });
+  //   console.log(allData);
+  //   setAllUser(allData);
+  // } catch(err){
+  //   setErr(true)
+  // }
+  // }), [])
   const handleSearch = async () => {
     const q = query(
       collection(db, "users"),
       where("displayName", "==", username)
-    );
-
-    try{
-      const querySnapshot = await getDocs(q);
+      );
+      
+      try{
+        const querySnapshot = await getDocs(q); 
+        console.log(querySnapshot)
       querySnapshot.forEach((doc) => {
         setUser(doc.data())
       });
